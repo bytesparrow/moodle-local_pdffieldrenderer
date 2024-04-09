@@ -18,7 +18,7 @@
  * Plugin version and other meta-data are defined here.
  *
  * @package     local_pdffieldrenderer
- * @copyright   2022 Bernhard Strehl <moodle@software.bernhard-strehl.de>
+ * @copyright   2022 Bernhard Strehl <moodle@bytesparrow.de>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

@@ -54,4 +54,9 @@ class core_customfield_renderer extends renderer {
         return  $this->output->render($renderable);
     }
 
+     /**
+      * für den fall, dass data_controller_fixed anwendung findet:
+      *  public function render_customfield_local_modcustomfields_mod($model, $fieldname="rendered_pdffile") {
+      */
+
 }

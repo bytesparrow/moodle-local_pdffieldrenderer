@@ -25,11 +25,12 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_pdffieldrenderer';
-$plugin->version = 2022111100;
-$plugin->requires = 2022041900;
+$plugin->version   = 2023042400;
+$plugin->requires  = 2022041900;
+$plugin->supported = [400, 403];
 $plugin->maturity = MATURITY_ALPHA;
 $plugin->dependencies = array(
-        "theme_contentmodifier" => 2022110700,
+        "theme_contentmodifier" => 2024041700,
         "customfield_file" => 2022031800,
         "local_pdfjsrenderer" => 2022101100
 );

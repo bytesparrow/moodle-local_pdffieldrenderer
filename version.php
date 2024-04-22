@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_pdffieldrenderer';
-$plugin->version   = 2023042400;
+$plugin->version   = 2023042401;
 $plugin->requires  = 2022041900;
 $plugin->supported = [400, 403];
 $plugin->maturity = MATURITY_ALPHA;

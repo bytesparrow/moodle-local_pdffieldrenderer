@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -18,7 +19,6 @@ namespace local_pdffieldrenderer\output;
 
 use core_customfield\output\renderer;
 
-
 /**
  * Overrides the renderer of plugin moodle-customfield_file
  * To find other renderer-names, edit
@@ -32,31 +32,36 @@ use core_customfield\output\renderer;
  */
 class core_customfield_renderer extends renderer {
 
+  /**
+   * renders the custom field "rendered_pdffile"
+   */
+  public function render_customfield_local_modcustomfields_mod_rendered_pdffile($model) {
+    return $this->render_customfield_local_modcustomfields_mod($model, "rendered_pdffile");
+  }
 
-    /**
-     * renders the custom field "rendered_pdffile"
-     */
-    public function render_customfield_local_modcustomfields_mod_rendered_pdffile($model) {
+  /**
+   * unspezifischer Renderer, nimmt alle Feldnamen als Parameter.
+   */
+  public function render_customfield_local_modcustomfields_mod($model, $fieldshortname) {
 
-        if (!count($model->files)) {
-            return false;
-        }
-
-        $fs = get_file_storage();
-
-        $fileid = $model->files[0]->fileid;
-        $fileobject = $fs->get_file_by_id($fileid);
-
-        if ($fileobject->get_mimetype() !== 'application/pdf') {
-            return "";
-        }
-        $renderable = new \local_pdfjsrenderer\output\pdfjs_renderer($fileobject);
-        return  $this->output->render($renderable);
+    if ($fieldshortname != get_config('local_pdffieldrenderer', 'custompdffieldname')) {
+      return false;
+    }
+    $fs = get_file_storage();
+    if (!count($model->files)) {
+      return false;
     }
 
-     /**
-      * für den fall, dass data_controller_fixed anwendung findet:
-      *  public function render_customfield_local_modcustomfields_mod($model, $fieldname="rendered_pdffile") {
-      */
+    $fileid = $model->files[0]->fileid;
+    $fileobject = $fs->get_file_by_id($fileid);
+    if (!$fileobject) {
+      return false;
+    }
+    if ($fileobject->get_mimetype() !== 'application/pdf') {
+      return "";
+    }
+    $renderable = new \local_pdfjsrenderer\output\pdfjs_renderer($fileobject);
+    return $this->output->render($renderable);
+  }
 
 }
